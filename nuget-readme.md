@@ -30,17 +30,23 @@ Add the Mailchimp API key to `appsettings.json` and configure the Mailchimp Audi
 }
 ```
 
-For local demo/testing, use .NET user secrets instead of storing a real API key in source control.
+For local demo/testing, use .NET user secrets instead of storing a real API key in source control:
+
+```bash
+dotnet user-secrets set "Mailchimp:ApiKey" "your-mailchimp-api-key" --project demo/Mailchimp.Umbraco.Demo
+```
 
 ## Features
 
-- Supports Umbraco 14&ndash;17
 - Secure API key configuration
-- Tags and merge field mapping
+- Tag support
+- Merge field mapping
 - Structured merge fields such as `ADDRESS.*`
 - Optional subscription status
 - Update existing Mailchimp members
 
 ## Screenshots
 
-Screenshots are available in the gallery above.
+- [Workflow Picker](https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-picker.png)
+- [Workflow Settings](https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-settings-1.png)
+- [Merge Fields Settings](https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-settings-2.png)

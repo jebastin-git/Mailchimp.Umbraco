@@ -13,6 +13,8 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 
     steps:
       - name: Checkout
@@ -44,15 +46,15 @@ jobs:
           path: artifacts/*
 
       - name: Publish package
-        if: ${{ secrets.NUGET_API_KEY != '' }}
-        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+        if: ${{ env.NUGET_API_KEY != '' }}
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ env.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
 
       - name: Publish symbol package
-        if: ${{ secrets.NUGET_API_KEY != '' }}
-        run: dotnet nuget push "artifacts/*.snupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+        if: ${{ env.NUGET_API_KEY != '' }}
+        run: dotnet nuget push "artifacts/*.snupkg" --api-key "${{ env.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
 
       - name: Missing NuGet secret
-        if: ${{ secrets.NUGET_API_KEY == '' }}
+        if: ${{ env.NUGET_API_KEY == '' }}
         run: |
           echo "NUGET_API_KEY secret is not configured."
           echo "Add it in GitHub repository settings before publishing to NuGet."

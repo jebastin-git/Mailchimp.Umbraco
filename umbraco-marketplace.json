@@ -1,7 +1,7 @@
 {
   "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
-  "Title": "Mailchimp.Umbraco",
-  "Description": "Mailchimp workflow integration for Umbraco Forms, focused on subscribing form submissions to Mailchimp audiences.",
+  "Title": "Mailchimp for Umbraco Forms",
+  "Description": "Modern Mailchimp integration for Umbraco Forms. Send form submissions directly to Mailchimp audiences with support for tags, merge fields, and structured data.",
   "PackageType": "Integration",
   "Categories": "Campaign & Marketing",
   "DocumentationUrl": "https://github.com/jebastin-git/Mailchimp.Umbraco",
@@ -9,15 +9,15 @@
   "VersionDependencyMode": "SemVer",
   "Screenshots": [
     {
-      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/src/Mailchimp.Umbraco/assets/mailchimp-workflow-picker.png",
+      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-picker.png",
       "Caption": "Mailchimp workflow available in the Umbraco Forms workflow picker."
     },
     {
-      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/src/Mailchimp.Umbraco/assets/mailchimp-workflow-settings-1.png",
+      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-settings-1.png",
       "Caption": "Workflow settings for list, field aliases, tags, and subscription behavior."
     },
     {
-      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/src/Mailchimp.Umbraco/assets/mailchimp-workflow-settings-2.png",
+      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-settings-2.png",
       "Caption": "Merge field mapping support, including structured Mailchimp address fields."
     }
   ],

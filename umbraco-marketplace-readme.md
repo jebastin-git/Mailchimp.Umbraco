@@ -5,14 +5,34 @@ Send form submissions directly to Mailchimp audiences with support for tags, mer
 
 ## Compatibility
 
-| Umbraco Version | .NET Version |
-|----------------|-------------|
-| 14             | .NET 8      |
-| 15             | .NET 8      |
-| 16             | .NET 8      |
-| 17             | .NET 10     |
+<table>
+  <thead>
+    <tr>
+      <th>Umbraco Version</th>
+      <th>.NET Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>17</td>
+      <td>.NET 10</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>.NET 8</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>.NET 8</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>.NET 8</td>
+    </tr>
+  </tbody>
+</table>
 
-Supports Umbraco 14–17.
+Supports Umbraco 14&ndash;17.
 
 ## Requirements
 
@@ -37,9 +57,11 @@ Add the Mailchimp API key to `appsettings.json` and configure the Mailchimp Audi
 }
 ```
 
+For local demo/testing, use .NET user secrets instead of storing a real API key in source control.
+
 ## Features
 
-- Supports Umbraco 14–17
+- Supports Umbraco 14&ndash;17
 - Secure API key configuration
 - Tags and merge field mapping
 - Structured merge fields such as `ADDRESS.*`
@@ -48,5 +70,6 @@ Add the Mailchimp API key to `appsettings.json` and configure the Mailchimp Audi
 
 ## Screenshots
 
-![Workflow Picker](assets/workflow-picker.png)
-![Workflow Settings](assets/workflow-settings.png)
+![Workflow Picker](https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-picker.png)
+![Workflow Settings 1](https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-settings-1.png)
+![Workflow Settings 2](https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/assets/mailchimp-workflow-settings-2.png)

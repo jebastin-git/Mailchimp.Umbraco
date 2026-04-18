@@ -6,6 +6,7 @@
   "Categories": "Campaign & Marketing",
   "DocumentationUrl": "https://github.com/jebastin-git/Mailchimp.Umbraco",
   "IssueTrackerUrl": "https://github.com/jebastin-git/Mailchimp.Umbraco/issues",
+  "VersionDependencyMode": "SemVer",
   "LicenseTypes": [
     "Free"
   ],

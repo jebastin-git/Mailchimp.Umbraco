@@ -1,0 +1,58 @@
+name: Publish NuGet Package
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: publish-nuget-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore
+        run: dotnet restore Mailchimp.Umbraco.slnx
+
+      - name: Build
+        run: dotnet build Mailchimp.Umbraco.slnx --configuration Release --no-restore
+
+      - name: Pack
+        run: dotnet pack src/Mailchimp.Umbraco/Mailchimp.Umbraco.csproj --configuration Release --no-build --output artifacts
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: artifacts/*
+
+      - name: Publish package
+        if: ${{ secrets.NUGET_API_KEY != '' }}
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+
+      - name: Publish symbol package
+        if: ${{ secrets.NUGET_API_KEY != '' }}
+        run: dotnet nuget push "artifacts/*.snupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+
+      - name: Missing NuGet secret
+        if: ${{ secrets.NUGET_API_KEY == '' }}
+        run: |
+          echo "NUGET_API_KEY secret is not configured."
+          echo "Add it in GitHub repository settings before publishing to NuGet."

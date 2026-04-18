@@ -1,0 +1,25 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "Title": "Mailchimp.Umbraco",
+  "Description": "Mailchimp workflow integration for Umbraco Forms, focused on subscribing form submissions to Mailchimp audiences.",
+  "PackageType": "Integration",
+  "Categories": "Campaign & Marketing",
+  "DocumentationUrl": "https://github.com/jebastin-git/Mailchimp.Umbraco",
+  "IssueTrackerUrl": "https://github.com/jebastin-git/Mailchimp.Umbraco/issues",
+  "VersionDependencyMode": "SemVer",
+  "LicenseTypes": [
+    "Free"
+  ],
+  "Tags": [
+    "mailchimp",
+    "forms",
+    "workflow",
+    "marketing"
+  ],
+  "AuthorDetails": {
+    "Name": "Jebastin Jeyaraj",
+    "Url": "https://github.com/jebastin-git",
+    "ImageUrl": "https://github.com/jebastin-git.png",
+    "SyncContributorsFromRepository": true
+  }
+}

@@ -8,6 +8,7 @@
 
     <Authors>Jebastin Jeyaraj</Authors>
     <Description>Mailchimp workflow integration for Umbraco Forms</Description>
+    <PackageIcon>mailchimp-logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jebastin-git/Mailchimp.Umbraco</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jebastin-git/Mailchimp.Umbraco</RepositoryUrl>
@@ -15,7 +16,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>Initial release of Mailchimp workflow integration for Umbraco Forms.</PackageReleaseNotes>
 
-    <PackageTags>umbraco mailchimp forms workflow</PackageTags>
+    <PackageTags>umbraco umbraco-marketplace mailchimp forms workflow</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -28,10 +29,12 @@
 
   <ItemGroup>
     <None Include="..\\..\\README.md" Pack="true" PackagePath="\" Link="README.md" />
+    <None Include="assets\\mailchimp-logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
     <PackageReference Include="Umbraco.Forms.Core.Providers" Version="[14.2.3,15.0.0)" />
+    <PackageReference Include="Umbraco.Cms.Core" Version="[14.3.0,15.0.0)" />
     <PackageReference Include="Azure.Identity" Version="1.14.2" />
     <PackageReference Include="MailKit" Version="4.16.0" />
     <PackageReference Include="MessagePack" Version="3.1.4" />
@@ -40,12 +43,11 @@
     <PackageReference Include="System.Drawing.Common" Version="8.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.7.1" />
     <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.6" />
-    <PackageReference Include="Umbraco.Cms.Api.Management" Version="14.3.4" />
-    <PackageReference Include="Umbraco.Cms.Web.Common" Version="14.3.4" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
     <PackageReference Include="Umbraco.Forms.Core.Providers" Version="[17.3.0,18.0.0)" />
+    <PackageReference Include="Umbraco.Cms.Core" Version="[17.3.0,18.0.0)" />
     <PackageReference Include="MailKit" Version="4.16.0" />
     <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.6" />
   </ItemGroup>

@@ -1,68 +1,52 @@
-# Mailchimp.Umbraco
+# Mailchimp for Umbraco Forms
 
-Mailchimp.Umbraco is an Umbraco Forms integration package for sending form submissions to a Mailchimp audience through a custom workflow.
+Modern Mailchimp integration for Umbraco Forms.
+Send form submissions directly to Mailchimp audiences with support for tags, merge fields, and structured data.
 
-## What It Does
+## Compatibility
 
-- Adds a Mailchimp workflow to Umbraco Forms
-- Subscribes form submissions to a Mailchimp audience
-- Supports tags
-- Supports `subscribed` and `pending` Mailchimp statuses
-- Can update existing Mailchimp members
-- Supports merge field mapping, including structured address fields
+| Umbraco Version | .NET Version |
+|----------------|-------------|
+| 14             | .NET 8      |
+| 15             | .NET 8      |
+| 16             | .NET 8      |
+| 17             | .NET 10     |
 
-## Supported Versions
+Supports Umbraco 14–17.
 
-| Package version | Umbraco CMS | .NET |
-| --- | --- | --- |
-| `1.x` | `17.x` | `10` |
-| `1.x` | `14.x` | `8` |
+## Requirements
 
-## Typical Use Case
+- Umbraco Forms must be installed
+- Mailchimp account and API key required
 
-Use this package when you want editors to connect an Umbraco Form directly to Mailchimp without building custom submission handling code.
+## Installation
 
-Do not install this package unless Umbraco Forms is already installed in the site.
+```bash
+dotnet add package Mailchimp.Umbraco
+```
 
 ## Configuration
 
-Add the Mailchimp API key in app configuration:
+Add the Mailchimp API key to `appsettings.json` and configure the Mailchimp Audience/List ID on each workflow.
 
 ```json
 {
   "Mailchimp": {
-    "ApiKey": ""
+    "ApiKey": "your-mailchimp-api-key"
   }
 }
 ```
 
-## Workflow Settings
+## Features
 
-The workflow supports these settings:
+- Supports Umbraco 14–17
+- Secure API key configuration
+- Tags and merge field mapping
+- Structured merge fields such as `ADDRESS.*`
+- Optional subscription status
+- Update existing Mailchimp members
 
-- List ID
-- Email Field Alias
-- Tags
-- Subscription Status
-- Update Existing Member
-- Merge Fields
+## Screenshots
 
-Example merge field mapping:
-
-```text
-FNAME:firstName,LNAME:lastName,PHONE:phone,COMPANY:company
-```
-
-Example structured address mapping:
-
-```text
-ADDRESS.addr1:addressLine1,ADDRESS.city:city,ADDRESS.state:state,ADDRESS.zip:zip,ADDRESS.country:country
-```
-
-## Notes
-
-- This package is focused on Umbraco Forms workflows, not a general Mailchimp SDK.
-- The Mailchimp API key is read from configuration and is not stored in workflow settings.
-- A new NuGet version is required before Marketplace changes appear on the public listing.
-- `pending` is useful when your Mailchimp audience requires confirmation before subscription.
-- `Update Existing Member` uses Mailchimp upsert behavior for existing contacts.
+![Workflow Picker](assets/workflow-picker.png)
+![Workflow Settings](assets/workflow-settings.png)

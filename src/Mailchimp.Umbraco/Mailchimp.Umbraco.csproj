@@ -4,19 +4,24 @@
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
 
     <PackageId>Mailchimp.Umbraco</PackageId>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
+    <Title>Mailchimp for Umbraco Forms</Title>
 
     <Authors>Jebastin Jeyaraj</Authors>
-    <Description>Mailchimp workflow integration for Umbraco Forms</Description>
+    <Description>Modern Mailchimp integration for Umbraco Forms. Send form submissions directly to Mailchimp audiences with support for tags, merge fields, and structured data.</Description>
     <PackageIcon>mailchimp-logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jebastin-git/Mailchimp.Umbraco</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jebastin-git/Mailchimp.Umbraco</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Mailchimp workflow integration for Umbraco Forms with tags, merge field mapping, subscription status support, update-existing-member support, and Marketplace metadata.</PackageReleaseNotes>
+    <PackageReleaseNotes>- Added Subscription Status support (subscribed/pending)
+- Added Update Existing Member support
+- Supports Umbraco 14–17
+- Improved merge field mapping including structured fields (ADDRESS.*)
+- Enhanced stability and configuration handling</PackageReleaseNotes>
 
-    <PackageTags>umbraco umbraco-marketplace mailchimp forms workflow</PackageTags>
+    <PackageTags>umbraco;mailchimp;forms;integration;marketing;umbraco-marketplace</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

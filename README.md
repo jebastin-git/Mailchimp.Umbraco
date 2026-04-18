@@ -1,78 +1,71 @@
-# Mailchimp.Umbraco
+# Mailchimp for Umbraco Forms
 
-Mailchimp workflow integration for Umbraco Forms.
+Modern Mailchimp integration for Umbraco Forms.
+Send form submissions directly to Mailchimp audiences with support for tags, merge fields, and structured data.
 
-This package is built specifically for Umbraco Forms and provides a custom workflow for subscribing form submissions to a Mailchimp audience.
+## Compatibility
 
-## Features
+| Umbraco Version | .NET Version |
+|----------------|-------------|
+| 14             | .NET 8      |
+| 15             | .NET 8      |
+| 16             | .NET 8      |
+| 17             | .NET 10     |
 
-- Custom Umbraco Forms workflow for Mailchimp
-- Supports Umbraco 17 (`.NET 10`) and Umbraco 14 (`.NET 8`)
-- Supports Mailchimp tags
-- Supports subscription status selection (`subscribed` or `pending`)
-- Supports updating existing Mailchimp members
-- Supports Mailchimp merge fields, including structured address fields
+Supports Umbraco 14–17.
+
+## Requirements
+
+- Umbraco Forms must be installed
+- Mailchimp account and API key required
 
 ## Installation
-
-Install the package in your Umbraco site:
 
 ```bash
 dotnet add package Mailchimp.Umbraco
 ```
 
-This package is intended for sites that already use Umbraco Forms.
-Do not install this package unless Umbraco Forms is already installed in the site.
-
-## Compatibility
-
-| Package version | Umbraco CMS | .NET | Notes |
-| --- | --- | --- | --- |
-| `1.x` | `17.x` | `10` | Primary supported target |
-| `1.x` | `14.x` | `8` | Secondary supported target |
-
 ## Configuration
 
-Add your Mailchimp API key to configuration:
+Configure the Mailchimp API key in `appsettings.json`, then use the Mailchimp Audience/List ID in the workflow settings for each form.
 
 ```json
 {
   "Mailchimp": {
-    "ApiKey": ""
+    "ApiKey": "your-mailchimp-api-key"
   }
 }
 ```
 
-## Workflow Setup
+## Usage
 
-After installing the package, add the `Mailchimp` workflow to an Umbraco Form and configure:
+1. Install the package in an Umbraco site that already has Umbraco Forms installed.
+2. Open a form in Umbraco Forms and add the `Mailchimp` workflow.
+3. Set the Mailchimp Audience/List ID.
+4. Map the form field alias that contains the subscriber email address.
+5. Optionally add tags, merge field mappings, subscription status, and update-existing-member behavior.
 
-- `List ID`
-- `Email Field Alias`
-- `Tags` (optional)
-- `Subscription Status` (`subscribed` or `pending`)
-- `Update Existing Member`
-- `Merge Fields` (optional)
-
-Example merge fields:
+Example merge field mappings:
 
 ```text
-FNAME:firstName,LNAME:lastName,PHONE:phone,BIRTHDAY:birthday,COMPANY:company
-```
-
-Example structured address mapping:
-
-```text
+FNAME:firstName,LNAME:lastName,PHONE:phone,COMPANY:company
 ADDRESS.addr1:addressLine1,ADDRESS.city:city,ADDRESS.state:state,ADDRESS.zip:zip,ADDRESS.country:country
 ```
 
-## Notes
+## Features
 
-- `Email Field Alias` should point to the form field containing the subscriber email address.
-- The Mailchimp API key is read from configuration and is not stored in workflow settings.
-- `BIRTHDAY` values should be provided in the format expected by Mailchimp, typically `MM/DD`.
-- `pending` sends Mailchimp's confirmation flow and is useful when you need double opt-in.
-- `Update Existing Member` uses Mailchimp upsert behavior so tags and merge fields can be refreshed for existing contacts.
+- Supports Umbraco 14–17
+- Secure API key configuration (`appsettings.json`)
+- Tag support
+- Merge field mapping
+- Structured merge fields (e.g. `ADDRESS.*`)
+- Optional subscription status
+- Update existing Mailchimp members
+
+## Screenshots
+
+![Workflow Picker](assets/workflow-picker.png)
+![Workflow Settings](assets/workflow-settings.png)
 
 ## License
 

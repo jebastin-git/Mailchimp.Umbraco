@@ -12,7 +12,7 @@ Send form submissions directly to Mailchimp audiences with support for tags, mer
 | 15 | .NET 8 |
 | 14 | .NET 8 |
 
-Supports Umbraco 14-17.
+Supports Umbraco 14&ndash;17.
 
 ## Requirements
 
@@ -37,6 +37,12 @@ Configure the Mailchimp API key in `appsettings.json`, then use the Mailchimp Au
 }
 ```
 
+For local demo/testing, prefer .NET user secrets instead of committing a real API key:
+
+```bash
+dotnet user-secrets set "Mailchimp:ApiKey" "your-mailchimp-api-key" --project demo/Mailchimp.Umbraco.Demo
+```
+
 ## Usage
 
 1. Install the package in an Umbraco site that already has Umbraco Forms installed.
@@ -54,7 +60,7 @@ ADDRESS.addr1:addressLine1,ADDRESS.city:city,ADDRESS.state:state,ADDRESS.zip:zip
 
 ## Features
 
-- Supports Umbraco 14-17
+- Supports Umbraco 14&ndash;17
 - Secure API key configuration (`appsettings.json`)
 - Tag support
 - Merge field mapping

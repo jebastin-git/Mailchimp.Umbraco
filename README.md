@@ -6,13 +6,13 @@ Send form submissions directly to Mailchimp audiences with support for tags, mer
 ## Compatibility
 
 | Umbraco Version | .NET Version |
-|----------------|-------------|
-| 14             | .NET 8      |
-| 15             | .NET 8      |
-| 16             | .NET 8      |
-| 17             | .NET 10     |
+| --- | --- |
+| 17 | .NET 10 |
+| 16 | .NET 8 |
+| 15 | .NET 8 |
+| 14 | .NET 8 |
 
-Supports Umbraco 14–17.
+Supports Umbraco 14-17.
 
 ## Requirements
 
@@ -54,7 +54,7 @@ ADDRESS.addr1:addressLine1,ADDRESS.city:city,ADDRESS.state:state,ADDRESS.zip:zip
 
 ## Features
 
-- Supports Umbraco 14–17
+- Supports Umbraco 14-17
 - Secure API key configuration (`appsettings.json`)
 - Tag support
 - Merge field mapping
@@ -64,8 +64,9 @@ ADDRESS.addr1:addressLine1,ADDRESS.city:city,ADDRESS.state:state,ADDRESS.zip:zip
 
 ## Screenshots
 
-![Workflow Picker](assets/workflow-picker.png)
-![Workflow Settings](assets/workflow-settings.png)
+![Workflow Picker](assets/mailchimp-workflow-picker.png)
+![Workflow Settings 1](assets/mailchimp-workflow-settings-1.png)
+![Workflow Settings 2](assets/mailchimp-workflow-settings-2.png)
 
 ## License
 

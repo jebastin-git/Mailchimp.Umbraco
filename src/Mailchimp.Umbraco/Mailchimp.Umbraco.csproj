@@ -4,7 +4,7 @@
     <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
 
     <PackageId>Mailchimp.Umbraco</PackageId>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <Title>Mailchimp for Umbraco Forms</Title>
 
     <Authors>Jebastin Jeyaraj</Authors>
@@ -17,7 +17,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>- Added Subscription Status support (subscribed/pending)
 - Added Update Existing Member support
-- Supports Umbraco 14–17
+- Supports Umbraco 14&#x2013;17
 - Improved merge field mapping including structured fields (ADDRESS.*)
 - Enhanced stability and configuration handling</PackageReleaseNotes>
 

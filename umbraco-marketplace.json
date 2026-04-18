@@ -7,6 +7,20 @@
   "DocumentationUrl": "https://github.com/jebastin-git/Mailchimp.Umbraco",
   "IssueTrackerUrl": "https://github.com/jebastin-git/Mailchimp.Umbraco/issues",
   "VersionDependencyMode": "SemVer",
+  "Screenshots": [
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/src/Mailchimp.Umbraco/assets/mailchimp-workflow-picker.png",
+      "Caption": "Mailchimp workflow available in the Umbraco Forms workflow picker."
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/src/Mailchimp.Umbraco/assets/mailchimp-workflow-settings-1.png",
+      "Caption": "Workflow settings for list, field aliases, tags, and subscription behavior."
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/jebastin-git/Mailchimp.Umbraco/main/src/Mailchimp.Umbraco/assets/mailchimp-workflow-settings-2.png",
+      "Caption": "Merge field mapping support, including structured Mailchimp address fields."
+    }
+  ],
   "LicenseTypes": [
     "Free"
   ],

@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,8 @@ public class MailchimpService
     public async Task SubscribeAsync(
         string email,
         string listId,
+        string subscriptionStatus,
+        bool updateExistingMember,
         string? tags = null,
         Dictionary<string, object>? mergeFields = null,
         CancellationToken cancellationToken = default)
@@ -45,7 +48,11 @@ public class MailchimpService
             return;
         }
 
-        var url = $"https://{dc}.api.mailchimp.com/3.0/lists/{listId}/members";
+        var normalizedStatus = NormalizeSubscriptionStatus(subscriptionStatus);
+        var memberHash = GetSubscriberHash(email);
+        var url = updateExistingMember
+            ? $"https://{dc}.api.mailchimp.com/3.0/lists/{listId}/members/{memberHash}"
+            : $"https://{dc}.api.mailchimp.com/3.0/lists/{listId}/members";
 
         var parsedTags = tags?
             .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
@@ -55,18 +62,12 @@ public class MailchimpService
         var hasTags = parsedTags.Length > 0;
         var hasMergeFields = mergeFields is { Count: > 0 };
 
-        var body = (hasTags, hasMergeFields) switch
-        {
-            (true,  true)  => JsonSerializer.Serialize(new { email_address = email, status = "subscribed", tags = parsedTags, merge_fields = mergeFields }),
-            (true,  false) => JsonSerializer.Serialize(new { email_address = email, status = "subscribed", tags = parsedTags }),
-            (false, true)  => JsonSerializer.Serialize(new { email_address = email, status = "subscribed", merge_fields = mergeFields }),
-            _              => JsonSerializer.Serialize(new { email_address = email, status = "subscribed" })
-        };
+        var body = BuildRequestBody(email, normalizedStatus, updateExistingMember, parsedTags, mergeFields);
 
         var client = _httpClientFactory.CreateClient();
         client.Timeout = TimeSpan.FromSeconds(10);
 
-        var request = new HttpRequestMessage(HttpMethod.Post, url)
+        var request = new HttpRequestMessage(updateExistingMember ? HttpMethod.Put : HttpMethod.Post, url)
         {
             Content = new StringContent(body, Encoding.UTF8, "application/json")
         };
@@ -95,7 +96,12 @@ public class MailchimpService
 
         if (response.IsSuccessStatusCode)
         {
-            _logger.LogInformation("Mailchimp subscription successful for {Email} in list {ListId}", email, listId);
+            _logger.LogInformation(
+                "Mailchimp subscription successful for {Email} in list {ListId} with status {Status} (update existing: {UpdateExistingMember})",
+                email,
+                listId,
+                normalizedStatus,
+                updateExistingMember);
             return;
         }
 
@@ -125,5 +131,92 @@ public class MailchimpService
             return null;
 
         return apiKey[(dashIndex + 1)..];
+    }
+
+    private static string NormalizeSubscriptionStatus(string subscriptionStatus) =>
+        string.Equals(subscriptionStatus, "pending", StringComparison.OrdinalIgnoreCase)
+            ? "pending"
+            : "subscribed";
+
+    private static string BuildRequestBody(
+        string email,
+        string subscriptionStatus,
+        bool updateExistingMember,
+        string[] tags,
+        Dictionary<string, object>? mergeFields)
+    {
+        var hasTags = tags.Length > 0;
+        var hasMergeFields = mergeFields is { Count: > 0 };
+
+        if (updateExistingMember)
+        {
+            return (hasTags, hasMergeFields) switch
+            {
+                (true, true) => JsonSerializer.Serialize(new
+                {
+                    email_address = email,
+                    status = subscriptionStatus,
+                    status_if_new = subscriptionStatus,
+                    tags,
+                    merge_fields = mergeFields
+                }),
+                (true, false) => JsonSerializer.Serialize(new
+                {
+                    email_address = email,
+                    status = subscriptionStatus,
+                    status_if_new = subscriptionStatus,
+                    tags
+                }),
+                (false, true) => JsonSerializer.Serialize(new
+                {
+                    email_address = email,
+                    status = subscriptionStatus,
+                    status_if_new = subscriptionStatus,
+                    merge_fields = mergeFields
+                }),
+                _ => JsonSerializer.Serialize(new
+                {
+                    email_address = email,
+                    status = subscriptionStatus,
+                    status_if_new = subscriptionStatus
+                })
+            };
+        }
+
+        return (hasTags, hasMergeFields) switch
+        {
+            (true, true) => JsonSerializer.Serialize(new
+            {
+                email_address = email,
+                status = subscriptionStatus,
+                tags,
+                merge_fields = mergeFields
+            }),
+            (true, false) => JsonSerializer.Serialize(new
+            {
+                email_address = email,
+                status = subscriptionStatus,
+                tags
+            }),
+            (false, true) => JsonSerializer.Serialize(new
+            {
+                email_address = email,
+                status = subscriptionStatus,
+                merge_fields = mergeFields
+            }),
+            _ => JsonSerializer.Serialize(new
+            {
+                email_address = email,
+                status = subscriptionStatus
+            })
+        };
+    }
+
+    private static string GetSubscriberHash(string email)
+    {
+        var normalizedEmail = email.Trim().ToLowerInvariant();
+        var bytes = Encoding.UTF8.GetBytes(normalizedEmail);
+        var hash = MD5.HashData(bytes);
+        return Convert.ToHexString(hash).ToLowerInvariant();
     }
 }

@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/jebastin-git/Mailchimp.Umbraco</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>Initial release of Mailchimp workflow integration for Umbraco Forms.</PackageReleaseNotes>
+    <PackageReleaseNotes>Mailchimp workflow integration for Umbraco Forms with tags, merge field mapping, subscription status support, update-existing-member support, and Marketplace metadata.</PackageReleaseNotes>
 
     <PackageTags>umbraco umbraco-marketplace mailchimp forms workflow</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

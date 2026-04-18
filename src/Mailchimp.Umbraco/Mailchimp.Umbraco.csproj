@@ -4,13 +4,13 @@
     <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
 
     <PackageId>Mailchimp.Umbraco</PackageId>
-    <Version>1.1.3</Version>
+    <Version>1.1.5</Version>
     <Title>Mailchimp for Umbraco Forms</Title>
 
     <Authors>Jebastin Jeyaraj</Authors>
     <Description>Modern Mailchimp integration for Umbraco Forms. Send form submissions directly to Mailchimp audiences with support for tags, merge fields, and structured data.</Description>
     <PackageIcon>mailchimp-logo.png</PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReadmeFile>nuget-readme.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jebastin-git/Mailchimp.Umbraco</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jebastin-git/Mailchimp.Umbraco</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -33,8 +33,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\\..\\README.md" Pack="true" PackagePath="\" Link="README.md" />
+    <None Include="..\\..\\nuget-readme.md" Pack="true" PackagePath="\" Link="nuget-readme.md" />
     <None Include="assets\\mailchimp-logo.png" Pack="true" PackagePath="\" />
+    <None Include="..\\..\\assets\\mailchimp-workflow-picker.png" Pack="true" PackagePath="assets/" />
+    <None Include="..\\..\\assets\\mailchimp-workflow-settings-1.png" Pack="true" PackagePath="assets/" />
+    <None Include="..\\..\\assets\\mailchimp-workflow-settings-2.png" Pack="true" PackagePath="assets/" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">

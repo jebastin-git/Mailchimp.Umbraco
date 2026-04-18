@@ -46,7 +46,7 @@ public class MailchimpWorkflow : WorkflowType
 
     [Setting(
         "Merge Fields",
-        Description = "Comma-separated mergeTag:formAlias pairs. Use dotted merge tags for structured Mailchimp fields. Examples: FNAME:firstName,LNAME:lastName,PHONE:phone,BIRTHDAY:birthday,COMPANY:company,ADDRESS.addr1:addressLine1,ADDRESS.city:city,ADDRESS.state:state,ADDRESS.zip:zip,ADDRESS.country:country",
+        Description = "Comma-separated mergeTag:formAlias pairs. Examples: FNAME:firstName, LNAME:lastName, PHONE:phone. Structured fields: ADDRESS.addr1:addressLine1, ADDRESS.city:city, ADDRESS.zip:zip. See the README for full examples.",
         DisplayOrder = 60)]
     public string MergeFields { get; set; } = string.Empty;
 
@@ -69,6 +69,8 @@ public class MailchimpWorkflow : WorkflowType
 
         if (string.IsNullOrWhiteSpace(_options.ApiKey))
             errors.Add(new Exception("Mailchimp API key is not configured. Set Mailchimp:ApiKey in configuration."));
+        else if (!_options.ApiKey.Contains('-', StringComparison.Ordinal))
+            errors.Add(new Exception("Mailchimp API key format looks invalid. Expected a key containing a Mailchimp datacenter suffix."));
 
         if (string.IsNullOrWhiteSpace(ListId))
             errors.Add(new Exception("Mailchimp List ID is required"));

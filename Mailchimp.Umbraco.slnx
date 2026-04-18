@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/demo/">
+    <Project Path="demo/Mailchimp.Umbraco.Demo/Mailchimp.Umbraco.Demo.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Mailchimp.Umbraco/Mailchimp.Umbraco.csproj" />
+  </Folder>
+</Solution>

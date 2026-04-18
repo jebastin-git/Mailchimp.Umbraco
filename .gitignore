@@ -1,0 +1,58 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+
+# Logs and diagnostics
+*.log
+*.binlog
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# User and IDE files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+.vscode/
+.idea/
+.claude/
+
+# Local assistant / agent folders
+.codex/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Node / frontend tooling
+node_modules/
+
+# Umbraco runtime files
+appsettings-schema.json
+appsettings-schema.*.json
+umbraco-package-schema.json
+
+demo/Mailchimp.Umbraco.Demo/umbraco/Data/TEMP/
+demo/Mailchimp.Umbraco.Demo/umbraco/Logs/
+demo/Mailchimp.Umbraco.Demo/wwwroot/media/
+demo/Mailchimp.Umbraco.Demo/umbraco/Data/*.sqlite.db
+demo/Mailchimp.Umbraco.Demo/umbraco/Data/*.sqlite.db-shm
+demo/Mailchimp.Umbraco.Demo/umbraco/Data/*.sqlite.db-wal
+
+# Local app/runtime folders
+demo/Mailchimp.Umbraco.Demo/logs/
+
+# Optional local environment files
+.env
+.env.*

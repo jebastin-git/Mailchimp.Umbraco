@@ -1,0 +1,30 @@
+﻿@using Umbraco.SampleSite.Models
+@using Umbraco.Forms.Web
+@using Umbraco.Forms.Web.Extensions
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Contact>
+@{
+    Layout = "_Master.cshtml";
+    var formId = Model.Value<Guid>("contactForm");
+}
+
+<partial name="Partials/SectionHeader"/>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>@Model.MapHeader</h2>
+                @Model.MapCoordinates
+            </div>
+            <div class="col-md-6">
+                <h2>@Model.ContactFormHeader</h2>
+                @Model.ContactIntro
+                @if (formId !=null)
+                {
+                    <umb-forms-render form-id="@formId" />
+                }
+                @*<partial name="Partials/ContactForm" model="@(new ContactFormViewModel())"/>*@
+            </div>
+        </div>
+    </div>
+</section>

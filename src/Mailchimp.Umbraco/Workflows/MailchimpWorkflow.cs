@@ -11,6 +11,13 @@ namespace Mailchimp.Umbraco.Workflows;
 
 public class MailchimpWorkflow : WorkflowType
 {
+    private static readonly HashSet<string> AllowedSubscriptionStatuses =
+        new(StringComparer.OrdinalIgnoreCase)
+        {
+            "subscribed",
+            "pending"
+        };
+
     private readonly ILogger<MailchimpWorkflow> _logger;
     private readonly MailchimpService _mailchimpService;
     private readonly MailchimpOptions _options;
@@ -25,9 +32,22 @@ public class MailchimpWorkflow : WorkflowType
     public string Tags { get; set; } = string.Empty;
 
     [Setting(
+        "Subscription Status",
+        Description = "Use subscribed for immediate subscription or pending to send Mailchimp double opt-in confirmation.",
+        DisplayOrder = 40)]
+    public string SubscriptionStatus { get; set; } = "subscribed";
+
+    [Setting(
+        "Update Existing Member",
+        Description = "When enabled, existing Mailchimp members are updated instead of being skipped.",
+        View = "Umb.PropertyEditorUi.Toggle",
+        DisplayOrder = 50)]
+    public bool UpdateExistingMember { get; set; }
+
+    [Setting(
         "Merge Fields",
         Description = "Comma-separated mergeTag:formAlias pairs. Use dotted merge tags for structured Mailchimp fields. Examples: FNAME:firstName,LNAME:lastName,PHONE:phone,BIRTHDAY:birthday,COMPANY:company,ADDRESS.addr1:addressLine1,ADDRESS.city:city,ADDRESS.state:state,ADDRESS.zip:zip,ADDRESS.country:country",
-        DisplayOrder = 40)]
+        DisplayOrder = 60)]
     public string MergeFields { get; set; } = string.Empty;
 
     public MailchimpWorkflow(
@@ -56,6 +76,9 @@ public class MailchimpWorkflow : WorkflowType
         if (string.IsNullOrWhiteSpace(EmailFieldAlias))
             errors.Add(new Exception("Email field alias is required"));
 
+        if (!AllowedSubscriptionStatuses.Contains(SubscriptionStatus))
+            errors.Add(new Exception("Subscription status must be either subscribed or pending"));
+
         return errors;
     }
 
@@ -79,7 +102,13 @@ public class MailchimpWorkflow : WorkflowType
             resolvedMergeFields = ResolveLegacyMergeFields(record);
         }
 
-        await _mailchimpService.SubscribeAsync(email, ListId, Tags, resolvedMergeFields);
+        await _mailchimpService.SubscribeAsync(
+            email,
+            ListId,
+            SubscriptionStatus,
+            UpdateExistingMember,
+            Tags,
+            resolvedMergeFields);
 
         return WorkflowExecutionStatus.Completed;
     }

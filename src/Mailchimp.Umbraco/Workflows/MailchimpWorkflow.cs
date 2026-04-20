@@ -42,7 +42,7 @@ public class MailchimpWorkflow : WorkflowType
         Description = "When enabled, existing Mailchimp members are updated instead of being skipped.",
         View = "Umb.PropertyEditorUi.Toggle",
         DisplayOrder = 50)]
-    public bool UpdateExistingMember { get; set; }
+    public string UpdateExistingMember { get; set; } = "0";
 
     [Setting(
         "Merge Fields",
@@ -61,6 +61,8 @@ public class MailchimpWorkflow : WorkflowType
         Id = new Guid("2e4c5f8a-1b3d-4e7f-9a2c-6d8e0f1b3c5d");
         Name = "Mailchimp";
         Description = "Subscribe user to Mailchimp audience";
+        Icon = "icon-megaphone";
+        Group = "Services";
     }
 
     public override List<Exception> ValidateSettings()
@@ -108,7 +110,7 @@ public class MailchimpWorkflow : WorkflowType
             email,
             ListId,
             SubscriptionStatus,
-            UpdateExistingMember,
+            UpdateExistingMember == "1" || UpdateExistingMember.Equals("true", StringComparison.OrdinalIgnoreCase),
             Tags,
             resolvedMergeFields);
 

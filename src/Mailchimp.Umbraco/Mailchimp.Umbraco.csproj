@@ -4,7 +4,7 @@
     <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
 
     <PackageId>Mailchimp.Umbraco</PackageId>
-    <Version>1.1.6</Version>
+    <Version>1.1.7</Version>
     <Title>Mailchimp for Umbraco Forms</Title>
 
     <Authors>Jebastin Jeyaraj</Authors>
